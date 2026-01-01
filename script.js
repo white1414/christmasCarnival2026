@@ -37,6 +37,10 @@ function resizeCanvas() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 window.addEventListener('resize', resizeCanvas);
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', resizeCanvas);
+}
+window.addEventListener('orientationchange', resizeCanvas);
 resizeCanvas();
 
 function createSnowflakes() {
