@@ -58,7 +58,10 @@ canvas.snow{
 .intro-card p{color:var(--muted);line-height:1.6;font-size:1.05rem}
 .hint{margin-top:14px;color:var(--accent);font-weight:700;display:inline-flex;align-items:center;gap:12px}
 .hint .arrow{display:inline-flex;align-items:center;justify-content:center}
-.hint .arrow svg{width:44px;height:44px;color:var(--accent-2);transform-origin:center center;animation:arrow-pulse 1.2s ease-in-out infinite}
+.hint .arrow svg{width:44px;height:44px;max-width:44px;max-height:44px;display:block;color:var(--accent-2);transform-origin:center center;animation:arrow-pulse 1.2s ease-in-out infinite}
+
+/* Strong fallback to prevent external CSS from scaling the SVG */
+.hint .arrow svg, .hint .arrow svg *{width:44px !important;height:44px !important;max-width:44px !important;max-height:44px !important}
 
 @keyframes arrow-pulse{
   0%{transform:scale(1);opacity:1}
