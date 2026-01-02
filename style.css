@@ -105,3 +105,24 @@ main,header,.theme-toggle{position:relative}
 
 .attribution .highlight{color:var(--accent);font-weight:900;padding:2px 6px;border-radius:6px;background:linear-gradient(180deg, rgba(229,57,53,0.06), rgba(229,57,53,0.03));}
 
+/* Live status pop card (top-right) */
+.live-card{position:sticky;top:80px;display:block;z-index:1200;min-width:260px;max-width:760px;background:linear-gradient(180deg, rgba(25,8,8,0.85), rgba(20,14,14,0.75));color:var(--text);border-radius:12px;padding:10px 12px;box-shadow:0 12px 30px rgba(0,0,0,0.45);border:1px solid rgba(229,57,53,0.12);backdrop-filter:blur(6px);margin:18px auto;max-height:calc(100vh - 160px);overflow:auto}
+.live-card h4{margin:0 0 6px 0;font-size:0.95rem;color:var(--accent-2)}
+.live-list{display:flex;flex-direction:column;gap:8px;max-height:160px;overflow:auto;padding-right:4px}
+.live-item{display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005))}
+.live-info{display:flex;flex-direction:column}
+.live-time{font-size:0.85rem;color:var(--muted);font-weight:700}
+.live-title{font-size:1rem;font-weight:800;color:#fff}
+.live-place{font-size:0.85rem;color:var(--muted);font-weight:600}
+.live-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 8px 24px rgba(229,57,53,0.2);animation:dot-pulse 1.2s ease-in-out infinite}
+.live-close{background:transparent;border:0;color:var(--muted);font-size:14px;cursor:pointer;padding:4px;border-radius:8px}
+.live-close:hover{color:var(--accent)}
+
+@media(max-width:640px){
+  /* keep sticky but inset for mobile so it doesn't cover header */
+  .live-card{position:sticky;top:68px;left:12px;right:12px;max-width:none;max-width:calc(100% - 24px);margin:12px auto;padding:10px;max-height:calc(100vh - 120px)}
+  .live-card h4{font-size:0.92rem}
+  .live-item{padding:8px;gap:8px}
+  .live-list{max-height:140px}
+}
+
