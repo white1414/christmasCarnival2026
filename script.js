@@ -12,11 +12,7 @@ themeToggle.addEventListener('click', ()=>{
 // Remove horizontal carousel logic; enable vertical scrolling layout.
 // We keep theme toggle and snowfall only.
 
-// Allow keyboard arrows
-window.addEventListener('keydown', e => {
-  if(e.key === 'ArrowLeft') showSlide(slideIndex - 1);
-  if(e.key === 'ArrowRight') showSlide(slideIndex + 1);
-});
+// (No horizontal carousel; remove leftover keyboard handlers)
 
 // Snowfall effect using canvas (as provided, integrated)
 const canvas = document.createElement('canvas');
@@ -86,6 +82,35 @@ updateSnowfall();
 
 // Initialize small defaults
 setTheme('dark');
-// Mark TODO completed
-// (managed via the todo list tool)
-showSlide(0);
+
+// Load schedule from JSON and render activity cards
+async function loadSchedule(url = 'schedule.json'){
+  const grid = document.querySelector('.grid');
+  if(!grid) return;
+  try{
+    const res = await fetch(url, {cache: 'no-store'});
+    if(!res.ok) throw new Error('Network response was not ok');
+    const data = await res.json();
+    // expect data to be an array of activities
+    grid.innerHTML = '';
+    for(const act of data){
+      const el = document.createElement('div');
+      el.className = 'activity';
+      el.innerHTML = `
+        <div class="act-time">${act.time || ''}</div>
+        <div class="act-title">${act.title || ''}</div>
+        <div class="act-place">${act.place || ''}</div>
+      `;
+      grid.appendChild(el);
+    }
+  }catch(err){
+    console.error('Failed to load schedule.json:', err);
+  }
+}
+
+// call loadSchedule when DOM is ready
+if (document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', ()=> loadSchedule());
+} else {
+  loadSchedule();
+}
